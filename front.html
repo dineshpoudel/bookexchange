@@ -53,10 +53,14 @@
 	<br>
 	<label id="facebook"> Facebook link:
 	  <input type="text" name="facebook" value="{{ facebook }}">
-	</label>
-	{{ contactError }}
+	</label>{{ contactError }}
 	<br>
-	<input type="submit">
+	<label id="remark"> Any Remarks:
+	  <textarea name="remark">{{ remark }} </textarea>
+	</label>
+	<br>
+	<input type="submit" name="submit" value="{{ submit }}">
+	<input type="button" name="reset" onclick="{{resetAction}}" value="{{ reset }}">
 	<br>
       </form>
       <div> (*) denotes required fields</div>
@@ -66,3 +70,7 @@
     <div id="heading" > Heading </div>
   </body>
 </html>
+
+<!--javascript todos: change the style of textbox and make it uneditable when submit=verify data -->
+
+Reset button is not working
