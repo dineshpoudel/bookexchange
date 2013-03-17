@@ -12,47 +12,47 @@
     {% block content %}
     {{ output }}				
     <div id="addBook" > 
-      <form method="post">
+      <form method="post" action="/">
 
 	<label id="bookTitle"> Book Title(*):
-	  <input type="text" name="bookTitle" required> {{ bookTitleError }}
+	  <input type="text" name="bookTitle" value="{{ bookTitle }}"> {{ bookTitleError }}
 	</label>
 
 
 	<br>
 	<label id="courseID"> Course:
- 	  <input type="text" name="courseID">
+ 	  <input type="text" name="courseID" value="{{ courseID }}">
 	</label>
 
 
 	<br>
 	<label id="ISBN"> ISBN:
-	  <input type"text" name="ISBN">
+	  <input type"text" name="ISBN" value="{{ ISBN }}">
 	</label>
 	<br>
 	<label id="edition"> Edition:
-	  <input type="text" name="edition">
+	  <input type="text" name="edition" value="{{ edition }}">
 	</label>
 	<br>
 	<label id="bookCondition"> Book condition(*):
-	  <textarea name="bookCondition" required></textarea>
-	  {{ conditionError }}
+	  <textarea name="bookCondition" >{{ bookCondition }}</textarea>
+	  {{ bookConditionError }}
 	</label>
 	<br>
 	<label id="price"> Asking Price(*):
-	  <input type="text" name="price" required> {{ priceError }}
+	  <input type="text" name="price"  value="{{ price }}"> {{ priceError }}
 	</label>
 	<br>
 	<label id="phoneNumber"> Phone Number:
-	  <input type="text" name="phoneNumber">
+	  <input type="text" name="phoneNumber" value="{{ phoneNumber }}">
 	</label>
 	<br>
 	<label id="email"> Email address:
-	  <input type="text" name="email">
+	  <input type="text" name="email" value="{{ email }}">
 	</label>
 	<br>
 	<label id="facebook"> Facebook link:
-	  <input type="text" name="facebook">
+	  <input type="text" name="facebook" value="{{ facebook }}">
 	</label>
 	{{ contactError }}
 	<br>
@@ -66,4 +66,3 @@
     <div id="heading" > Heading </div>
   </body>
 </html>
->
