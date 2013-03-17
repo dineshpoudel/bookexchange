@@ -1,25 +1,69 @@
 <!DOCTYPE html>
 
 <html>
-	<head>
-		<title> {{ mainpageTitle }} </title>
-		<meta charset="UTF-8">
-		<link rel="stylesheet" href="static/main.css">
-		
-	</head>
+  <head>
+    <title> {{ mainpageTitle }} </title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="static/main.css">
+  </head>
 	
-	<body>
-		<div id="bookSearch" >Search Books Here </div>
-		
-		{% block content %}
-			{{ output }}	
-			
-			<div id="addBook" > Add Book </div>
-			
-			<div id="featuredBooks" > Featured Books Here </div>
-			
-		{% endblock %}
-		
-		<div id="heading" > Heading </div>
-	</body>
+  <body>
+    <div id="bookSearch" >Search Books Here </div>
+    {% block content %}
+    {{ output }}				
+    <div id="addBook" > 
+      <form method="post">
+
+	<label id="bookTitle"> Book Title(*):
+	  <input type="text" name="bookTitle" required> {{ bookTitleError }}
+	</label>
+
+
+	<br>
+	<label id="courseID"> Course:
+ 	  <input type="text" name="courseID">
+	</label>
+
+
+	<br>
+	<label id="ISBN"> ISBN:
+	  <input type"text" name="ISBN">
+	</label>
+	<br>
+	<label id="edition"> Edition:
+	  <input type="text" name="edition">
+	</label>
+	<br>
+	<label id="bookCondition"> Book condition(*):
+	  <textarea name="bookCondition" required></textarea>
+	  {{ conditionError }}
+	</label>
+	<br>
+	<label id="price"> Asking Price(*):
+	  <input type="text" name="price" required> {{ priceError }}
+	</label>
+	<br>
+	<label id="phoneNumber"> Phone Number:
+	  <input type="text" name="phoneNumber">
+	</label>
+	<br>
+	<label id="email"> Email address:
+	  <input type="text" name="email">
+	</label>
+	<br>
+	<label id="facebook"> Facebook link:
+	  <input type="text" name="facebook">
+	</label>
+	{{ contactError }}
+	<br>
+	<input type="submit">
+	<br>
+      </form>
+      <div> (*) denotes required fields</div>
+    </div>	
+    <div id="featuredBooks" > Featured Books Here </div>
+    {% endblock %}		
+    <div id="heading" > Heading </div>
+  </body>
 </html>
+>
