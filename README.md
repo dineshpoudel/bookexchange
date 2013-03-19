@@ -2,6 +2,7 @@ TODOS:
 =======
 
 <ol>
+<li>cache not implemented yet</li>
 <li>when server returns 0, clear the value of textbox with javascript</li>
 <li>Use table to nicely align textboxes and label</li>
 <li>change the style of textbox and make it uneditable when submit=verify data</li>

@@ -2,6 +2,7 @@ from render import *
 
 #out - template_values
 out = {'mainpageTitle':'Book Exchange','submit':'Add Book','reset':'Reset','resetAction':'reset()','newBook':''}
+
 class MainPage(webapp2.RequestHandler):
 	def get(self):
 		global out
@@ -21,6 +22,7 @@ class MainPage(webapp2.RequestHandler):
 			out['bookConditionError'] = ''
 			out['priceError'] = ''
 			out['contactError'] = ''
+			out['message'] = ''
 			if not newBook.bookTitle:
 				out['bookTitleError'] = 'Book Title cant be empty.'
 			elif not newBook.bookCondition:
@@ -43,6 +45,10 @@ class BookAdded(webapp2.RequestHandler):
 		global out
 		out['message'] = 'Book successfully added!!!'
 		out['newBook'] = ''
-		render(self,'front.html',out)
+		out['submit'] = 'Add Book'
+		out['reset'] = 'Reset'
+		out['resetAction'] = 'reset()'
+		self.redirect('/')
+
 			
 app = webapp2.WSGIApplication([('/',MainPage),('/bookAdded',BookAdded)],debug=True)
