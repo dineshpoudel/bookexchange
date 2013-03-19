@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title> {{ mainpageTitle }} </title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="static/main.css">
+  </head>
+	
+  <body>
+    <div id="bookSearch" >Search Books Here </div>
+    {% block content %}
+    {{ message }}				
+    <div id="addBook" > 
+      <form method="post" action="/">
+
+	<label id="bookTitle"> Book Title(*):
+	  <input type="text" name="bookTitle" value="{{ newBook.bookTitle }}"> {{ bookTitleError }}
+	</label>
+
+
+	<br>
+	<label id="courseID"> Course:
+ 	  <input type="text" name="courseID" value="{{ newBook.courseID }}">
+	</label>
+
+
+	<br>
+	<label id="ISBN"> ISBN:
+	  <input type"text" name="ISBN" value="{{ newBook.ISBN }}">
+	</label>
+	<br>
+	<label id="edition"> Edition:
+	  <input type="text" name="edition" value="{{ newBook.edition }}">
+	</label>
+	<br>
+	<label id="bookCondition"> Book condition(*):
+	  <textarea name="bookCondition" >{{ newBook.bookCondition }}</textarea>
+	  {{ bookConditionError }}
+	</label>
+	<br>
+	<label id="price"> Asking Price(*):
+	  <input type="text" name="price"  value="{{ newBook.price }}"> {{ priceError }}
+	</label>
+	<br>
+	<label id="phoneNumber"> Phone Number:
+	  <input type="text" name="phoneNumber" value="{{ newBook.phoneNumber }}">
+	</label>
+	<br>
+	<label id="email"> Email address:
+	  <input type="text" name="email" value="{{ newBook.email }}">
+	</label>
+	<br>
+	<label id="facebook"> Facebook link:
+	  <input type="text" name="facebook" value="{{ newBook.facebook }}">
+	</label>{{ contactError }}
+	<br>
+	<label id="remark"> Any Remarks:
+	  <textarea name="remark">{{ newBook.remark }} </textarea>
+	</label>
+	<br>
+	<input type="submit" name="submit" value="{{ submit }}">
+	<input type="button" name="reset" onclick="{{resetAction}}" value="{{ reset }}">
+	<br>
+      </form>
+    </div>	
+    <div id="featuredBooks" >
+			Featured Books Here 
+		</div>
+    {% endblock %}		
+    <div id="heading" > Heading </div>
+  </body>
+</html>
