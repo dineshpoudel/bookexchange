@@ -1,8 +1,4 @@
 from render import *
-import webapp2
-
-from google.appengine.ext import db
-
 
 class Book(db.Model):
 	bookTitle = db.StringProperty()
@@ -12,12 +8,12 @@ class Book(db.Model):
 	bookCondition = db.TextProperty()
 	price = db.FloatProperty()
 	phoneNumber = db.PhoneNumberProperty()
-	email = db.EmailProperty()
-	facebook = db.LinkProperty()
+	email = db.StringProperty() #do not use email property
+	facebook = db.StringProperty() #do not use linkProperty because linkProperty cannot be null
 	remark = db.TextProperty()
 	
-	googleImage = db.LinkProperty()
-	sold = db.BooleanProperty(default=False)
+	googleImage = db.StringProperty() #do not use linkProperty
+	sold = db.BooleanProperty(indexed=False)
 	ipAddr = db.StringProperty()
 	timestamp = db.DateTimeProperty(auto_now_add=True)
 
@@ -29,7 +25,31 @@ class MainPage(webapp2.RequestHandler):
 	def post(self):
 		if self.request.get('submit') == 'Verify Data':
 			#store data to database
-			self.response.out.write('storing to database')
+			newBook = Book()			
+
+			newBook.bookTitle = self.request.get('bookTitle')
+			newBook.courseID = self.request.get('courseID')
+			newBook.ISBN = int(self.request.get('ISBN'))
+			newBook.edition = self.request.get('edition')
+			newBook.bookCondition = self.request.get('bookCondition')
+			newBook.price = float(self.request.get('price'))
+			newBook.phoneNumber = db.PhoneNumber(self.request.get('phoneNumber'))
+			newBook.email = self.request.get('email')
+			newBook.facebook = self.request.get('facebook')
+			newBook.remark = self.request.get('remark')
+			
+			newBook.googleImage = ''
+			newBook.sold = False
+			newBook.ipAddr = ((os.getenv("HTTP_CLIENT_IP") or 
+						os.getenv("HTTP_X_FORWARDED_FOR") or 
+						os.getenv("HTTP_X_FORWARDED_FOR") or 
+						os.getenv("REMOTE_ADDR") or 
+						"UNKNOWN"))
+
+			newBook.put()
+			
+
+			self.redirect('/bookAdded')  #display front page with thankyou message
 		
 		else: #validating
 			out = {'mainpageTitle':'Book Exchange','submit':'Add Book','reset':'Reset','resetAction':'reset()'}
@@ -61,5 +81,10 @@ class MainPage(webapp2.RequestHandler):
 			out['facebook'] = self.request.get('facebook')
 			out['remark'] = self.request.get('remark')
 			render(self,'front.html',out)
+
+class BookAdded(webapp2.RequestHandler):
+	def get(self):
+		out = {'mainpageTitle':'Book Exchange','submit':'Add Book','reset':'Reset','resetAction':'reset()','message':'Book Successfully Added!'}
+		render(self,'front.html',out)
 			
-app = webapp2.WSGIApplication([('/',MainPage)],debug=True)
+app = webapp2.WSGIApplication([('/',MainPage),('/bookAdded',BookAdded)],debug=True)
