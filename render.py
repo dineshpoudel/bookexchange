@@ -2,9 +2,25 @@ import jinja2
 import os
 import cgi
 import webapp2
+import json
+import urllib
 
 from google.appengine.api import memcache
 from google.appengine.ext import db
+
+#google Search
+def google(q):
+	links = memcache.get(q)
+	if links is None:
+		url = "https://www.googleapis.com/customsearch/v1?key=AIzaSyAAWdXpx2Fe5AyK9jnUn5JjD3Zjt3p3SOc&cx=011616688212487868943:hmezcysooqg&q=" + q +"&alt=json&safe=high&searchType=image&num=10"
+		p = urllib.urlopen(url)
+		response = json.loads(p.read())
+		data = response['items']
+		links = []
+		for eachData in data:
+			links.append(eachData['link'])	
+	return links
+
 
 #to render HTML
 def render(self,file,values={'junk':'junk'}):
@@ -54,7 +70,7 @@ def getBook(self):
 	book.facebook = self.request.get('facebook')
 	book.remark = self.request.get('remark')
 
-	book.googleImage = ''
+	book.googleImage = self.request.get('googleImage')
 	book.sold = False
 	book.ipAddr = ((os.getenv("HTTP_CLIENT_IP") or 
 				os.getenv("HTTP_X_FORWARDED_FOR") or 

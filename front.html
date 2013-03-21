@@ -66,12 +66,18 @@
 	  <textarea name="remark">{{ newBook.remark }} </textarea>
 	</label>
 	<br>
-
+	
+	<input type="hidden" name="googleImage" value=""> 
 	<input type="submit" name="submit" value="{{ submit }}">
 	<input type="button" name="reset" onclick="{{resetAction}}" value="{{ reset }}">
 	<br>
       </form>
     </div>	
+	<div id="googleImgaes"> Select one of the following images <hr> 
+{% for image in googleImages %}
+<img src="{{ image }}" height=120px></img> 
+{% endfor %}
+<hr> </div>
     <div id="featuredBooks" >
 			<b>Featured Books</b><hr> 
 	{% for book in featuredBooks %}

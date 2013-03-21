@@ -39,6 +39,7 @@ class MainPage(webapp2.RequestHandler):
 				out['submit'] = 'Verify Data'
 				out['reset'] = 'Edit Again'
 				out['resetAction'] = 'back()'
+				out['googleImages'] = google(newBook.bookTitle)
 			out['newBook'] = newBook
 			render(self,'front.html',out)
 
@@ -52,6 +53,7 @@ class BookAdded(webapp2.RequestHandler):
 		out['submit'] = 'Add Book'
 		out['reset'] = 'Reset'
 		out['resetAction'] = 'reset()'
+		out['googleImages'] = ''
 		out['featuredBooks'] = getFeaturedBooks(False)
 		self.redirect('/')
 
