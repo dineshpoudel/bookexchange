@@ -1,12 +1,16 @@
 from render import *
 
 #out - template_values
-out = {'mainpageTitle':'Book Exchange','submit':'Add Book','reset':'Reset','resetAction':'reset()','newBook':''}
+out = {'mainpageTitle':'Book Exchange','submit':'Add Book','reset':'Reset','resetAction':'reset()','newBook':'','featuredBooks':getFeaturedBooks()}
+
+
 
 class MainPage(webapp2.RequestHandler):
 	def get(self):
 		global out
 		render(self,'front.html',out)
+		out['message'] = ''
+
 	
 	def post(self):
 		if self.request.get('submit') == 'Verify Data':
@@ -48,6 +52,7 @@ class BookAdded(webapp2.RequestHandler):
 		out['submit'] = 'Add Book'
 		out['reset'] = 'Reset'
 		out['resetAction'] = 'reset()'
+		out['featuredBooks'] = getFeaturedBooks(False)
 		self.redirect('/')
 
 			
