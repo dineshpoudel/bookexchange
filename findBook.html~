@@ -1,0 +1,14 @@
+{% extends "front.html" %}
+
+{% block content %}
+Search Result for {{ bookRequested }} : <hr>
+
+	{% for book in books %}
+		{{ book.bookTitle }}
+		<br>
+	{% endfor %}
+<a href="/" > Go back to homepage </a>
+{% endblock %}
+
+
+
