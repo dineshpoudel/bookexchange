@@ -1,8 +1,15 @@
 from render import *
 
 #out - template_values
-out = {'mainpageTitle':'Book Exchange','submit':'Add Book','reset':'Reset','resetAction':'reset()','newBook':'','featuredBooks':getFeaturedBooks()}
+out = {'mainpageTitle':'Book Exchange','submit':'Add Book','reset':'Reset','resetAction':'reset()','newBook':'','featuredBooks':getFeaturedBooks(False)}
 
+class FindBook(webapp2.RequestHandler):
+	def post(self):
+		global out
+		q = self.request.get('findBook')
+		out['bookRequested'] = q
+		out['books'] = findBook(q)
+		render(self,'findBook.html',out)
 
 
 class MainPage(webapp2.RequestHandler):
@@ -54,8 +61,8 @@ class BookAdded(webapp2.RequestHandler):
 		out['reset'] = 'Reset'
 		out['resetAction'] = 'reset()'
 		out['googleImages'] = ''
-		out['featuredBooks'] = getFeaturedBooks(False)
+		out['featuredBooks'] = getFeaturedBooks(True)
 		self.redirect('/')
 
 			
-app = webapp2.WSGIApplication([('/',MainPage),('/bookAdded',BookAdded)],debug=True)
+app = webapp2.WSGIApplication([('/',MainPage),('/bookAdded',BookAdded),('/findBook',FindBook)],debug=True)

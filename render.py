@@ -8,17 +8,32 @@ import urllib
 from google.appengine.api import memcache
 from google.appengine.ext import db
 
+
+#all books stored into findBook cause there is very few records
+def findBook(q):
+	books = memcache.get('findBook')
+	if books is None:
+		books = db.GqlQuery('SELECT * FROM Book')
+		books = list(books)
+		memcache.add('findBook',books)
+	foundBook = []
+	for book in books:
+		if q in book.bookTitle:
+			foundBook.append(book)
+	return foundBook
+
 #google Search
 def google(q):
-	links = memcache.get(q)
+	links = memcache.get('google_%s'%q)
 	if links is None:
-		url = "https://www.googleapis.com/customsearch/v1?key=AIzaSyAAWdXpx2Fe5AyK9jnUn5JjD3Zjt3p3SOc&cx=011616688212487868943:hmezcysooqg&q=" + q +"&alt=json&safe=high&searchType=image&num=10"
+		url = ("https://www.googleapis.com/customsearch/v1?key=AIzaSyAAWdXpx2Fe5AyK9jnUn5JjD3Zjt3p3SOc&cx=011616688212487868943:hmezcysooqg&q=%s&alt=json&safe=high&searchType=image&num=10"%q)
 		p = urllib.urlopen(url)
 		response = json.loads(p.read())
 		data = response['items']
 		links = []
 		for eachData in data:
-			links.append(eachData['link'])	
+			links.append(eachData['link'])
+		memcache.add('google_%s'%q , links)	
 	return links
 
 
@@ -28,14 +43,14 @@ def render(self,file,values={'junk':'junk'}):
 
 jinja = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),autoescape=True)
 
-def getFeaturedBooks(cacheUpdated = True):
+def getFeaturedBooks(updateCache = False):
 	#featured books here
 	books = memcache.get('featuredBooks')
-	if not cacheUpdated or books is None:
+	if updateCache or books is None or books == []:
 		books = db.GqlQuery('SELECT * FROM Book ORDER BY timestamp DESC LIMIT 20')
 		books = list(books)
 		memcache.add('featuredBooks',books)
-		cacheUpdated = True
+		updateCache = False
 	return books
 
 

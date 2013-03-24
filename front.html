@@ -8,7 +8,8 @@
   </head>
 	
   <body>
-    <div id="bookSearch" >Search Books Here </div>
+    <div id="bookSearch" >Find Book : <form method="post" action="/findBook"><input type="search" name="findBook" placeholder="Press Enter to search"></form> </div>
+<hr>
     {% block content %}
     {{ message }}				
     <div id="addBook" > 
@@ -29,7 +30,7 @@
 	  <input type="text" name="price"  value="{{ newBook.price }}"> {{ priceError }}
 	</label>
 	<br>
-
+<i>Please provide at least one way to contact you</i><br>
 	<label id="phoneNumber"> Phone Number:
 	  <input type="text" name="phoneNumber" value="{{ newBook.phoneNumber }}">
 	</label>
@@ -85,7 +86,8 @@
 		<br>
 	{% endfor %}	
     </div>
-    {% endblock %}		
+    {% endblock %}	
+<hr>	
     <div id="heading" ><h1>Book Exchange</h1> </div>
   </body>
 </html>
