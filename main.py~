@@ -1,7 +1,7 @@
 from render import *
 
 #out - template_values
-out = {'mainpageTitle':'Book Exchange','submit':'Add Book','reset':'Reset','resetAction':'reset()','newBook':'','featuredBooks':getFeaturedBooks()}
+out = {'mainpageTitle':'Book Exchange','submit':'Add Book','reset':'Reset','resetAction':'reset()','newBook':'','featuredBooks':getFeaturedBooks(False)}
 
 class FindBook(webapp2.RequestHandler):
 	def post(self):
@@ -24,7 +24,14 @@ class MainPage(webapp2.RequestHandler):
 			#store data to database
 			newBook = getBook(self)
 			newBook.put()
-			self.redirect('/bookAdded')  #display front page with thankyou message
+			out['message'] = 'Book successfully added!!!'
+			out['newBook'] = ''
+			out['submit'] = 'Add Book'
+			out['reset'] = 'Reset'
+			out['resetAction'] = 'reset()'
+			out['googleImages'] = ''
+			out['featuredBooks'] = getFeaturedBooks(True)
+			self.redirect('/')
 		
 		else: #validating
 			global out
@@ -51,18 +58,5 @@ class MainPage(webapp2.RequestHandler):
 			render(self,'front.html',out)
 
 
-
-class BookAdded(webapp2.RequestHandler):
-	def get(self):
-		global out
-		out['message'] = 'Book successfully added!!!'
-		out['newBook'] = ''
-		out['submit'] = 'Add Book'
-		out['reset'] = 'Reset'
-		out['resetAction'] = 'reset()'
-		out['googleImages'] = ''
-		out['featuredBooks'] = getFeaturedBooks(True)
-		self.redirect('/')
-
 			
-app = webapp2.WSGIApplication([('/',MainPage),('/bookAdded',BookAdded),('/findBook',FindBook)],debug=True)
+app = webapp2.WSGIApplication([('/',MainPage),('/findBook',FindBook)],debug=True)

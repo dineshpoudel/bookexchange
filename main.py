@@ -23,8 +23,17 @@ class MainPage(webapp2.RequestHandler):
 		if self.request.get('submit') == 'Verify Data':
 			#store data to database
 			newBook = getBook(self)
-			newBook.put()
-			self.redirect('/bookAdded')  #display front page with thankyou message
+			if newBook.put():
+				out['message'] = 'Book successfully added!!!'
+				out['newBook'] = ''
+				out['submit'] = 'Add Book'
+				out['reset'] = 'Reset'
+				out['resetAction'] = 'reset()'
+				out['googleImages'] = ''
+				out['featuredBooks'] = getFeaturedBooks(True)
+				self.redirect('/')
+			else:
+				self.response.out('SNAPPED! contact admin')
 		
 		else: #validating
 			global out
@@ -51,18 +60,5 @@ class MainPage(webapp2.RequestHandler):
 			render(self,'front.html',out)
 
 
-
-class BookAdded(webapp2.RequestHandler):
-	def get(self):
-		global out
-		out['message'] = 'Book successfully added!!!'
-		out['newBook'] = ''
-		out['submit'] = 'Add Book'
-		out['reset'] = 'Reset'
-		out['resetAction'] = 'reset()'
-		out['googleImages'] = ''
-		out['featuredBooks'] = getFeaturedBooks(True)
-		self.redirect('/')
-
 			
-app = webapp2.WSGIApplication([('/',MainPage),('/bookAdded',BookAdded),('/findBook',FindBook)],debug=True)
+app = webapp2.WSGIApplication([('/',MainPage),('/findBook',FindBook)],debug=True)

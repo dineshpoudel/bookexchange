@@ -9,13 +9,9 @@ from google.appengine.api import memcache
 from google.appengine.ext import db
 
 
-#all books stored into findBook cause there is very few records
 def findBook(q):
-	books = memcache.get('findBook')
-	if books is None:
-		books = db.GqlQuery('SELECT * FROM Book')
-		books = list(books)
-		memcache.add('findBook',books)
+	books = db.GqlQuery('SELECT * FROM Book')
+	books = list(books)
 	foundBook = []
 	for book in books:
 		if q in book.bookTitle:
@@ -37,12 +33,7 @@ def google(q):
 	return links
 
 
-#to render HTML
-def render(self,file,values={'junk':'junk'}):
-	self.response.out.write(jinja.get_template(file).render(values))
-
-jinja = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),autoescape=True)
-
+#featured books
 def getFeaturedBooks(updateCache = False):
 	#featured books here
 	books = memcache.get('featuredBooks')
@@ -50,8 +41,13 @@ def getFeaturedBooks(updateCache = False):
 		books = db.GqlQuery('SELECT * FROM Book ORDER BY timestamp DESC LIMIT 20')
 		books = list(books)
 		memcache.add('featuredBooks',books)
-		updateCache = False
 	return books
+
+
+#to render HTML
+jinja = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),autoescape=True)
+def render(self,file,values={'junk':'junk'}):
+	self.response.out.write(jinja.get_template(file).render(values))
 
 
 #Book data type
