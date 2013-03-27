@@ -20,7 +20,7 @@
     {% block content %}
     {{ message }}				
     <div class="addBook" > Click Here to add the book you want to sell or donate<hr> 
-      <form method="post" action="/">
+      <form method="post" id="addBook" action="/">
 	<table class="table_form">
 	<label id="bookTitle"> Book Title(*):
 	  <input type="text" name="bookTitle" value="{{ newBook.bookTitle }}"> {{ bookTitleError }}
@@ -75,22 +75,26 @@
 	</label>
 	<br>
 	
-	<input type="hidden" name="googleImage" value=""> 
+	<input type="hidden" id="googleImage" name="googleImage" value=""> 
 	<input type="submit" name="submit" value="{{ submit }}">
 	<input type="button" name="reset" onclick="{{resetAction}}" value="{{ reset }}">
 	<br>
 	</table>
       </form>
     </div>	
+{% if googleImages %}
 	<div id="googleImgaes"> Select one of the following images <hr> 
-{% for image in googleImages %}
-<img src="{{ image }}" height=120px></img> 
-{% endfor %}
-<hr> </div>
+		{% for image in googleImages %}
+			<img src="{{ image }}" onclick="imageSelected('{{image}}')" height=120px></img> 
+		{% endfor %}
+	<hr></div>
+{% endif %}
+
     <div id="featuredBooks" >
 			<b>Featured Books</b><hr> 
-	{% for book in featuredBooks %}
-		{{ book.bookTitle }}
+	{% for book in featuredBooks %}		
+		<img src="{{ book.googleImage }}" height=120px>{{ book.bookTitle }}</img> 
+		
 		<br>
 	{% endfor %}	
     </div>

@@ -2,7 +2,6 @@ TODOS:
 =======
 
 <ol>
-<li>use javascript to set value of hidden googleImage input to clicked image</li>
 <li>when server returns 0, clear the value of textbox with javascript</li>
 <li>Use table to nicely align textboxes and label</li>
 <li>change the style of textbox and make it uneditable when submit=verify data</li>

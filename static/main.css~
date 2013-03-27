@@ -32,5 +32,6 @@ body{
 	padding:2px;
 	overflow:hidden;
 	height:20px;
+	cursor:pointer;
 	
 }
