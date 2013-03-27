@@ -166,5 +166,6 @@ pip-log.txt
 *.html~
 *.py~
 *.md~
-.gitignore
-.gitattributes
+*.css~
+*.js~
+*.*~
