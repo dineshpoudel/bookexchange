@@ -5,6 +5,7 @@
     <title> {{ mainpageTitle }} </title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="static/main.css">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="static/script.js"></script>
   </head>
 	
@@ -19,7 +20,8 @@
 
     {% block content %}
     {{ message }}				
-    <div class="addBook" > Click Here to add the book you want to sell or donate<hr> 
+    <span class="addBookClickable" > Add your book!</span>
+	<div class="addBookForm">
       <form method="post" id="addBook" action="/">
 	<table class="table_form">
 	<label id="bookTitle"> Book Title(*):
@@ -53,7 +55,7 @@
 	</label>{{ contactError }}
 	<br>
 
-<i>Enter more details (make this collapsible) </i><br>
+<span class="moreDetailsClickable">----------Enter more details --------------- </span><div class="moreDetailsForm">
 	<label id="courseID"> Course:
  	  <input type="text" name="courseID" value="{{ newBook.courseID }}">
 	</label>
@@ -73,8 +75,10 @@
 	<label id="remark"> Any Remarks:
 	  <textarea name="remark">{{ newBook.remark }} </textarea>
 	</label>
+	</div>
 	<br>
-	
+
+
 	<input type="hidden" id="googleImage" name="googleImage" value=""> 
 	<input type="submit" name="submit" value="{{ submit }}">
 	<input type="button" name="reset" onclick="{{resetAction}}" value="{{ reset }}">
@@ -92,10 +96,10 @@
 
     <div id="featuredBooks" >
 			<b>Featured Books</b><hr> 
-	{% for book in featuredBooks %}		
-		<img src="{{ book.googleImage }}" height=120px>{{ book.bookTitle }}</img> 
-		
-		<br>
+	{% for book in featuredBooks %}	
+	<span id="book">	
+		<img src="{{ book.googleImage }}" height=120px></img>
+	</span>
 	{% endfor %}	
     </div>
     {% endblock %}	
