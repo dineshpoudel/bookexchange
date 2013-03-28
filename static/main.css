@@ -24,14 +24,24 @@ body{
 		
 }
 
-.addBook{
+.addBookClickable{
 	position:relative;
-	background-color:#CCCCCC;
+	background-color:#CC9999;
+	cursor:pointer;
+	padding:2px;
+	
+}
+.moreDetailsClickable{
+}
+.addBookForm{
+
+}
+.moreDetailsForm{
+}
+
+#featuredBook#book{
+	position:relative;
 	top:auto;
 	left:auto;
-	padding:2px;
-	overflow:hidden;
-	height:auto;
-	cursor:pointer;
-	
+}
 }
