@@ -1,109 +1,80 @@
 <!DOCTYPE html>
 
 <html>
-  <head>
-    <title> {{ mainpageTitle }} </title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="static/main.css">
+<head>
+	<title> {{ mainpageTitle }} </title>
+	<meta charset="UTF-8">
+
+	<link rel="stylesheet" href="static/main.css">
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="static/script.js"></script>
-  </head>
-	
-  <body>
-    <div class="bookSearch" > 
+</head>
+<body>
+<!--heading -->
+<div class="heading" >Book Exchange </div>
+
+
+<!--book search -->
+<div class="bookSearch" > 
 	<form method="post" action="/findBook">
 	<label name="findBook">Search Book &nbsp;&nbsp;<input type="search" name="findBook" placeholder="Press Enter to search"></label>
 	</form>
 </div>
 
+<span id="message">{{ message }}</span>	
 
 
-    {% block content %}
-    {{ message }}				
-    <span class="addBookClickable" > Add your book!</span>
-	<div class="addBookForm">
-      <form method="post" id="addBook" action="/">
-	<table class="table_form">
-	<label id="bookTitle"> Book Title(*):
-	  <input type="text" name="bookTitle" value="{{ newBook.bookTitle }}"> {{ bookTitleError }}
-	</label>
-	<br>
+<!--add book -->
+{% block content %}		
 
-	<label id="bookCondition"> Book condition(*):
-	  <textarea name="bookCondition" >{{ newBook.bookCondition }}</textarea>
-	  {{ bookConditionError }}
-	</label>
-	<br>
-
-	<label id="price"> Asking Price(*):
-	  <input type="text" name="price"  value="{{ newBook.price }}"> {{ priceError }}
-	</label>
-	<br>
-<i>Please provide at least one way to contact you</i><br>
-	<label id="phoneNumber"> Phone Number:
-	  <input type="text" name="phoneNumber" value="{{ newBook.phoneNumber }}">
-	</label>
-	<br>
-
-	<label id="email"> Email address:
-	  <input type="text" name="email" value="{{ newBook.email }}">
-	</label>
-	<br>
-
-	<label id="facebook"> Facebook link:
-	  <input type="text" name="facebook" value="{{ newBook.facebook }}">
-	</label>{{ contactError }}
-	<br>
-
-<span class="moreDetailsClickable">----------Enter more details --------------- </span><div class="moreDetailsForm">
-	<label id="courseID"> Course:
- 	  <input type="text" name="courseID" value="{{ newBook.courseID }}">
-	</label>
-	<br>
-
-	<label id="ISBN"> ISBN:
-	  <input type"text" name="ISBN" value="{{ newBook.ISBN }}">
-	</label>
-	<br>
-
-	<label id="edition"> Edition:
-	  <input type="text" name="edition" value="{{ newBook.edition }}">
-	</label>
-	<br>
-
-
-	<label id="remark"> Any Remarks:
-	  <textarea name="remark">{{ newBook.remark }} </textarea>
-	</label>
-	</div>
-	<br>
-
-
-	<input type="hidden" id="googleImage" name="googleImage" value=""> 
-	<input type="submit" name="submit" value="{{ submit }}">
-	<input type="button" name="reset" onclick="{{resetAction}}" value="{{ reset }}">
-	<br>
+<span class="addBookClickable" > Add your book!</span>
+<div class="addBookForm">
+<form method="post" id="addBook" action="/">
+	
+<table class="table_form">
+<tr><td>Book Title(*):</td><td><input type="text" name="bookTitle" value="{{ newBook.bookTitle }}"> {{ bookTitleError }}</td></tr>
+<tr><td>Book condition(*):</td><td><textarea name="bookCondition" >{{ newBook.bookCondition }}</textarea>{{ bookConditionError }}</td></tr>
+<tr><td>Asking Price(*):</td><td><input type="text" name="price"  value="{{ newBook.price }}"> {{ priceError }}	</td></tr>
+<tr><td colspan=2><i>Please provide at least one way to contact you</i></td></tr>
+<tr><td>Phone Number:</td><td><input type="text" name="phoneNumber" value="{{ newBook.phoneNumber }}"></td></tr>
+<tr><td>Email address:</td><td><input type="text" name="email" value="{{ newBook.email }}"></td></tr>
+<tr><td>Facebook link:</td><td><input type="text" name="facebook" value="{{ newBook.facebook }}">{{ contactError }}</td></tr>
+<tr><td colspan=2><span class="moreDetailsClickable">----------Enter more details --------------- </span></td></tr>
+<tr><td colspan=2>
+	<div class="moreDetailsForm">
+	<table class="table_moreDetails_form">
+	<tr><td>Course:</td><td><input type="text" name="courseID" value="{{ newBook.courseID }}"></td></tr>
+	<tr><td>ISBN:</td><td><input type"text" name="ISBN" value="{{ newBook.ISBN }}"></td></tr>
+	<tr><td>Edition:</td><td><input type="text" name="edition" value="{{ newBook.edition }}"></td></tr>
+	<tr><td>Any Remarks:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><textarea name="remark">{{ newBook.remark }} </textarea></td></tr>
 	</table>
-      </form>
-    </div>	
+	</div>
+</td></tr>
+<input type="hidden" id="googleImage" name="googleImage" value=""> 
+<tr><td><input type="submit" name="submit" value="{{ submit }}"></td>
+<td><input type="button" name="reset" onclick="{{resetAction}}" value="{{ reset }}"></td></tr>
+</table>
+      
+</form></div>
+
+<!--google image for adding books-->
 {% if googleImages %}
-	<div id="googleImgaes"> Select one of the following images <hr> 
-		{% for image in googleImages %}
-			<img src="{{ image }}" onclick="imageSelected('{{image}}')" height=120px></img> 
-		{% endfor %}
-	<hr></div>
+<div id="googleImgaes"> Select one of the following images <hr> 
+{% for image in googleImages %}<img src="{{ image }}" onclick="imageSelected('{{image}}')" height=120px></img>{% endfor %}
+<hr></div>
 {% endif %}
 
-    <div id="featuredBooks" >
-			<b>Featured Books</b><hr> 
-	{% for book in featuredBooks %}	
-	<span id="book">	
-		<img src="{{ book.googleImage }}" height=120px></img>
-	</span>
-	{% endfor %}	
-    </div>
-    {% endblock %}	
-<hr>	
-    <div class="heading" ><h2>Book Exchange</h2> </div>
-  </body>
+
+<!--featured books -->
+
+<div id="featuredBooks" >
+<hr><b>Featured Books</b><hr> 
+{% for book in featuredBooks %}	
+<span id="book"><img src="{{ book.googleImage }}" height=120px></img></span>
+{% endfor %}	
+<hr></div>
+
+{% endblock %}	
+
+</body>
 </html>
