@@ -1,35 +1,10 @@
-<!DOCTYPE html>
-
-<html>
-<head>
-	<title> {{ mainpageTitle }} </title>
-	<meta charset="UTF-8">
-
-	<link rel="stylesheet" href="static/main.css">
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	<script src="static/script.js"></script>
-</head>
-<body>
-<!--heading -->
-<div class="heading" >Book Exchange </div>
-
-
-<!--book search -->
-<div class="bookSearch" > 
-	<form method="post" action="/findBook">
-	<label name="findBook">Search Book &nbsp;&nbsp;<input type="search" name="findBook" placeholder="Press Enter to search"></label>
-	</form>
-</div>
-
-<span id="message">{{ message }}</span>	
-
-
-<!--add book -->
-{% block content %}		
-
-<span class="addBookClickable" > Add your book!</span>
+{% extends "template.html" %}
+{% block content %}
+<br>
+<span class="addBookClickable" > Click here to enter your book details here</span>
+<hr>
 <div class="addBookForm">
-<form method="post" id="addBook" action="/">
+<form method="post" id="addBook" action="/verify">
 	
 <table class="table_form">
 <tr><td>Book Title(*):</td><td><input type="text" name="bookTitle" value="{{ newBook.bookTitle }}"> {{ bookTitleError }}</td></tr>
@@ -51,30 +26,21 @@
 	</div>
 </td></tr>
 <input type="hidden" id="googleImage" name="googleImage" value=""> 
-<tr><td><input type="button" name="reset" onclick="{{resetAction}}" value="{{ reset }}"></td>
-<td><input type="submit" name="submit" value="{{ submit }}"></td></tr>
+<tr><td><input type="reset" value="Re-enter Details"></td>
+<td><input type="submit" name="submit" value="Add Book"></td></tr>
 </table>
-      
+<hr>
 </form></div>
-
-<!--google image for adding books-->
-{% if googleImages %}
-<div id="googleImgaes"> Select one of the following images <hr> 
-{% for image in googleImages %}<img src="{{ image }}" onclick="imageSelected('{{image}}')" height=120px></img>{% endfor %}
-<hr></div>
-{% endif %}
-
 
 <!--featured books -->
 
 <div id="featuredBooks" >
-<hr><b>Featured Books</b><hr> 
+<b>Featured Books</b><hr> 
 {% for book in featuredBooks %}	
 <span id="book"><img src="{{ book.googleImage }}" height=120px></img></span>
 {% endfor %}	
 <hr></div>
 
-{% endblock %}	
 
-</body>
-</html>
+{% endblock %}
+

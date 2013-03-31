@@ -1,47 +1,23 @@
-body{
-	background-color:#CCCCCC;
-
-}
-
-.heading{
-	position:fixed;
-	background-color:#888888;
-	bottom:0;
-	left:0;
-	padding:2px;
-	width:100%;
-}
-
-.bookSearch{
-	position:relative;
-	background-color:#888888;
-	top:0;
-	left:0;
-	padding:2px;
-	text-align:center;
-	width:100%;
-	height:auto;	
-		
-}
-
 .addBookClickable{
-	position:relative;
-	background-color:#CC9999;
 	cursor:pointer;
-	padding:2px;
-	
-}
-.moreDetailsClickable{
 }
 .addBookForm{
-
+}
+#addBook{
+}
+.form_table{
+}
+.moreDetailsClickable{
+	cursor:pointer;
 }
 .moreDetailsForm{
 }
+.table_moreDetails_form{
+}
+#googleImages{
+}
+#featuredBooks{
+}
+#book{
+}
 
-#featuredBook#book{
-	position:relative;
-	top:auto;
-	left:auto;
-}
-}

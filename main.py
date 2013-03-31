@@ -1,11 +1,8 @@
 from render import *
 
-#out - template_values
-out = {'mainpageTitle':'Book Exchange','submit':'Add Book','reset':'Reset','resetAction':'reset()','newBook':'','featuredBooks':getFeaturedBooks(False)}
-
 class FindBook(webapp2.RequestHandler):
 	def post(self):
-		global out
+		out = {}
 		q = self.request.get('findBook')
 		out['bookRequested'] = q
 		out['books'] = findBook(q)
@@ -14,11 +11,10 @@ class FindBook(webapp2.RequestHandler):
 
 class MainPage(webapp2.RequestHandler):
 	def get(self):
-		global out
-		render(self,'front.html',out)
-		out['message'] = ''
+		out = {'newBook':'','featuredBooks':getFeaturedBooks(False)}
+		render(self,'main.html',out)
 
-	
+class Verify(webapp2.RequestHandler):	
 	def post(self):
 		if self.request.get('submit') == 'Verify Data':
 			#store data to database
@@ -36,7 +32,7 @@ class MainPage(webapp2.RequestHandler):
 				self.response.out('SNAPPED! contact admin')
 		
 		else: #validating
-			global out
+			out = {'newBook':'','featuredBooks':getFeaturedBooks(False)}
 			newBook = getBook(self)
 			out['bookTitleError'] = ''
 			out['bookConditionError'] = ''
@@ -57,8 +53,8 @@ class MainPage(webapp2.RequestHandler):
 				out['resetAction'] = 'back()'
 				out['googleImages'] = google(newBook.bookTitle)
 			out['newBook'] = newBook
-			render(self,'front.html',out)
+			render(self,'main.html',out)
 
 
 			
-app = webapp2.WSGIApplication([('/',MainPage),('/findBook',FindBook)],debug=True)
+app = webapp2.WSGIApplication([('/',MainPage),('/verify',Verify),('/findBook',FindBook)],debug=True)

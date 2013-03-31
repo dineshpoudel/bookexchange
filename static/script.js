@@ -1,5 +1,6 @@
 //hide addbook more details form initially
 $(function(){$(".moreDetailsForm").hide();});
+$(function(){$(".addBookForm").hide();});
 
 //addbook form toggler
 $(function(){$(".addBookClickable").click(function(){$(".addBookForm").slideToggle();})});

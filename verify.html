@@ -1,0 +1,18 @@
+{% extends "template.html" %}
+
+{% block content %}
+Verification:
+
+
+<!--google image for adding books-->
+{% if googleImages %}
+<div id="googleImgaes"> Select one of the following images <hr> 
+{% for image in googleImages %}<img src="{{ image }}" onclick="imageSelected('{{image}}')" height=120px></img>{% endfor %}
+<hr></div>
+{% endif %}
+
+
+{% endblock %}
+
+
+
