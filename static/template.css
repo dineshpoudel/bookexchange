@@ -8,8 +8,11 @@ body{
 	padding:5px;
 	width:auto;
 	font-family: 'Gabriela', Monospace;
+	text-decoration:none;
 }
-
+a{
+	text-decoration:none;
+}
 .title{
 	font-size:30px;
 }

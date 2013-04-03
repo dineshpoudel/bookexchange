@@ -14,7 +14,7 @@
 </head>
 <body>
 <!--heading -->
-<div class="heading" ><span class="title">Book Exchange</span> at Clark University
+<div class="heading"><a href="/"><span class="title">Book Exchange</span> at Clark University</a>
 	<!--book search -->
 	<div class="bookSearch" > 
 		<form method="post" action="/findBook">
@@ -24,7 +24,7 @@
 </div>
 <div id="message">{{ message }}</div>	
 
-{% block content %}{% endblock %}	
-
+{% block addBook %}{% endblock %}	
+{% block dispBook %}{% endblock %}
 </body>
 </html>

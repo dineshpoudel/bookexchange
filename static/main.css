@@ -21,3 +21,16 @@
 #book{
 }
 
+/*specific to verify.html*/
+.googleImg{
+	padding:2px;
+	border:solid 2px #555555;
+}
+.googleImg:hover{
+	border:#FF0000;
+}
+.googleImgDispImg{
+	height:200px;
+	padding:3px;
+	border:solid 2px #00FF00;
+}

@@ -1,15 +1,41 @@
 {% extends "template.html" %}
 
-{% block content %}
-Verification:
+{% block addBook %}
+<br>Verify the details you just entered.
+<hr>
+<div class="addBookForm">
+<form method="post" id="addBook" action="/verify">
+	
+<table class="table_form">
+<tr><td>Book Title(*):</td><td><input type="text" name="bookTitle" value="{{ newBook.bookTitle }}" readonly></td><td rowspan=11 id='googleImgDisp'></td></tr>
+<tr><td>Book condition(*):</td><td><textarea name="bookCondition"  readonly>{{ newBook.bookCondition }}</textarea></td></tr>
+<tr><td>Asking Price(*):</td><td><input type="text" name="price"  value="{{ newBook.price }}" readonly></td></tr>
+<tr><td>Phone Number:</td><td><input type="text" name="phoneNumber" value="{{ newBook.phoneNumber }}" readonly></td></tr>
+<tr><td>Email address:</td><td><input type="text" name="email" value="{{ newBook.email }}" readonly></td></tr>
+<tr><td>Facebook link:</td><td><input type="text" name="facebook" value="{{ newBook.facebook }}" readonly></td></tr>
+<tr><td>Course:</td><td><input type="text" name="courseID" value="{{ newBook.courseID }}" readonly></td></tr>
+<tr><td>ISBN:</td><td><input type"text" name="ISBN" value="{{ newBook.ISBN }}" readonly></td></tr>
+<tr><td>Edition:</td><td><input type="text" name="edition" value="{{ newBook.edition }}" readonly></td></tr>
+<tr><td>Any Remarks:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><textarea name="remark" readonly>{{ newBook.remark }} </textarea></td></tr>
+<input type="hidden" id="googleImage" name="googleImage" value=""> 
+<tr><td><input type="button" value="Edit Again" onclick="back()"></td>
+<td><input type="submit" name="submit" value="Verify"></td></tr>
+</table>
+<hr>
+</form></div>
 
 
 <!--google image for adding books-->
 {% if googleImages %}
 <div id="googleImgaes"> Select one of the following images <hr> 
-{% for image in googleImages %}<img src="{{ image }}" onclick="imageSelected('{{image}}')" height=120px></img>{% endfor %}
+<img class="googleImg" src="/static/noBookImage.gif" onclick="imageSelected('')" height=120px ></img>
+{% for image in googleImages %}<img class="googleImg" src="{{ image }}" onclick="imageSelected('{{image}}')" height=120px clicked=0></img>
+{% endfor %}
 <hr></div>
 {% endif %}
+
+
+
 
 
 {% endblock %}

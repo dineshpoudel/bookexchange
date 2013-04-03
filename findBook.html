@@ -1,12 +1,11 @@
-{% extends "template.html" %}
+{% extends "main.html" %}
 
-{% block content %}
+{% block dispBook %}
 Search Result for {{ bookRequested }} : <hr>
 	{% for book in books %}
 		{% if book.googleImage %}{{ book.googleImage }}	{% else %}{{ book.bookTitle }}{% endif %}<br>
 	{% endfor %}
 
-<br><br><a href="/" > Go back to homepage </a>
 {% endblock %}
 
 

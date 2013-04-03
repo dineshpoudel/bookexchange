@@ -1,10 +1,10 @@
 {% extends "template.html" %}
-{% block content %}
+{% block addBook %}
 <br>
 <span class="addBookClickable" > Click here to enter your book details here</span>
 <hr>
 <div class="addBookForm">
-<form method="post" id="addBook" action="/verify">
+<form method="post" id="addBook" action="/">
 	
 <table class="table_form">
 <tr><td>Book Title(*):</td><td><input type="text" name="bookTitle" value="{{ newBook.bookTitle }}"> {{ bookTitleError }}</td></tr>
@@ -25,13 +25,16 @@
 	</table>
 	</div>
 </td></tr>
-<input type="hidden" id="googleImage" name="googleImage" value=""> 
 <tr><td><input type="reset" value="Re-enter Details"></td>
 <td><input type="submit" name="submit" value="Add Book"></td></tr>
 </table>
 <hr>
 </form></div>
+{% endblock %}
 
+
+
+{% block dispBook %}
 <!--featured books -->
 
 <div id="featuredBooks" >
