@@ -1,6 +1,19 @@
 //hide addbook more details form initially
 $(function(){$(".moreDetailsForm").hide();});
-//$(function(){$(".addBookForm").hide();});
+$(function(){$(".contactForm").hide();});
+
+//auto toggle contact form
+$(function(){$("#bookTitle").blur(
+	function(){
+		if($('#bookTitle').val() == ''){
+			$(".contactForm").slideUp();
+			$(".moreDetailsForm").slideUp();
+		}else{
+			$(".contactForm").slideDown();
+			$(".moreDetailsForm").slideDown();
+		}
+	}
+)});
 
 //addbook form toggler
 $(function(){$(".addBookClickable").click(function(){$(".addBookForm").slideToggle();})});

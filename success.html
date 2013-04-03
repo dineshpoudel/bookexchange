@@ -1,0 +1,14 @@
+{% extends "template.html" %}
+{% block addBook %}
+
+<br>
+{{ dispMsg }}
+<br>
+<a href="/">Click Here to go back to homepage</a>
+<script langugage="javscript">
+window.setTimeout(function() {
+location.href = '/';
+}, 2500);
+</script>
+
+{% endblock %}

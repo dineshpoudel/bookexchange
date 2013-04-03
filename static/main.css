@@ -18,13 +18,11 @@
 }
 #featuredBooks{
 }
-#book{
-}
 
-/*specific to verify.html*/
 .googleImg{
 	padding:2px;
 	border:solid 2px #555555;
+	height:120px;
 }
 .googleImg:hover{
 	border:#FF0000;

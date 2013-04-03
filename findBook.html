@@ -1,10 +1,18 @@
 {% extends "main.html" %}
 
 {% block dispBook %}
+<script language="javascript">
+$(function(){$(".addBookForm").hide();});
+</script>
 Search Result for {{ bookRequested }} : <hr>
+	<table padding=2px>
 	{% for book in books %}
-		{% if book.googleImage %}{{ book.googleImage }}	{% else %}{{ book.bookTitle }}{% endif %}<br>
+		<tr><td>{% if book.googleImage %}<img class="googleImg" src="{{ book.googleImage }}"></img>{% else %}NO IMAGE{% endif %}</td>
+		<td>Name: {{ book.bookTitle }}<br>
+		Condition: {{ book.bookCondition }}<br>
+		Price: {{ book.price }}<br></td></tr>
 	{% endfor %}
+	</table>
 
 {% endblock %}
 

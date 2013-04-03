@@ -7,14 +7,19 @@
 <form method="post" id="addBook" action="/">
 	
 <table class="table_form">
-<tr><td>Book Title(*):</td><td><input type="text" name="bookTitle" value="{{ newBook.bookTitle }}"> {{ bookTitleError }}</td></tr>
-<tr><td>Book condition(*):</td><td><textarea name="bookCondition" >{{ newBook.bookCondition }}</textarea>{{ bookConditionError }}</td></tr>
+<tr><td>Book Title(*):</td><td><input type="text" id="bookTitle" name="bookTitle" value="{{ newBook.bookTitle }}" required> {{ bookTitleError }}</td></tr>
+<tr><td>Book condition(*):</td><td><textarea name="bookCondition" required>{{ newBook.bookCondition }}</textarea>{{ bookConditionError }}</td></tr>
 <tr><td>Asking Price(*):</td><td><input type="text" name="price"  value="{{ newBook.price }}"> {{ priceError }}	</td></tr>
-<tr><td colspan=2><i>Please provide at least one way to contact you</i></td></tr>
-<tr><td>Phone Number:</td><td><input type="text" name="phoneNumber" value="{{ newBook.phoneNumber }}"></td></tr>
-<tr><td>Email address:</td><td><input type="text" name="email" value="{{ newBook.email }}"></td></tr>
-<tr><td>Facebook link:</td><td><input type="text" name="facebook" value="{{ newBook.facebook }}">{{ contactError }}</td></tr>
-<tr><td colspan=2><span class="moreDetailsClickable">----------Enter more details --------------- </span></td></tr>
+
+<tr><td colspan=2>
+	<div class="contactForm">
+	<table class="table_contact_form">
+	<tr><td colspan=2><i>Please provide at least one way to contact you</i></td></tr>
+	<tr><td>Phone Number:</td><td><input type="text" name="phoneNumber" value="{{ newBook.phoneNumber }}"></td></tr>
+	<tr><td>Email address:</td><td><input type="text" name="email" value="{{ newBook.email }}"></td></tr>
+	<tr><td>Facebook link:</td><td><input type="text" name="facebook" value="{{ newBook.facebook }}">{{ contactError }}</td></tr>
+	<tr><td colspan=2><span class="moreDetailsClickable"><i>----------Enter more details ---------------</i> </span></td></tr>
+
 <tr><td colspan=2>
 	<div class="moreDetailsForm">
 	<table class="table_moreDetails_form">
@@ -25,8 +30,12 @@
 	</table>
 	</div>
 </td></tr>
+
 <tr><td><input type="reset" value="Re-enter Details"></td>
 <td><input type="submit" name="submit" value="Add Book"></td></tr>
+</table>
+</div>
+</tr></td>
 </table>
 <hr>
 </form></div>
@@ -39,11 +48,14 @@
 
 <div id="featuredBooks" >
 <b>Featured Books</b><hr> 
-{% for book in featuredBooks %}	
-<span id="book"><img src="{{ book.googleImage }}" height=120px></img></span>
-{% endfor %}	
-<hr></div>
-
+	<table>
+	{% for book in featuredBooks %}	
+		<tr><td>{% if book.googleImage %}<img class="googleImg" src="{{ book.googleImage }}"></img>{% else %}<img class="googleImg" src="/static/noBookImage.gif"></img>{% endif %}</td>
+		<td>Name: {{ book.bookTitle }}<br>
+		Condition: {{ book.bookCondition }}<br>
+		Price: {{ book.price }}<br></td></tr>
+	{% endfor %}
+	</table>
 
 {% endblock %}
 

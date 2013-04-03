@@ -12,8 +12,6 @@ class FindBook(webapp2.RequestHandler):
 class MainPage(webapp2.RequestHandler):
 	def get(self):
 		out = {'newBook':'','featuredBooks':getFeaturedBooks(False)}
-		if self.request.get('success') == '1':
-			out['message'] = "Book sucessfully Added!"
 		render(self,'main.html',out)
 
 	def post(self):
@@ -47,9 +45,9 @@ class Verify(webapp2.RequestHandler):
 	def post(self):
 		newBook = getBook(self)
 		if newBook.put():
-			self.redirect('/?success=1')
+			render(self,'success.html',{'dispMsg':'Book Successfully Added!'})
 		else:
-			self.response.out('SNAPPED! contact admin')
+			render(self,'success.html',{'dispMsg':'SNAPPED! CONTACT ADMINISTRATOR!'})
 
 
 		
