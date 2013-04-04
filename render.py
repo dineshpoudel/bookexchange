@@ -22,7 +22,7 @@ def findBook(q):
 def google(q):
 	links = memcache.get('google_%s'%q)
 	if links is None:
-		url = ("https://www.googleapis.com/customsearch/v1?key=AIzaSyAAWdXpx2Fe5AyK9jnUn5JjD3Zjt3p3SOc&cx=011616688212487868943:hmezcysooqg&q=%s&alt=json&safe=high&searchType=image&num=10"%q)
+		url = ("https://www.googleapis.com/customsearch/v1?key=KEY&cx=011616688212487868943:hmezcysooqg&q=%s&alt=json&safe=high&searchType=image&num=10"%q)
 		p = urllib.urlopen(url)
 		response = json.loads(p.read())
 		data = response['items']
