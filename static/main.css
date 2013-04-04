@@ -25,7 +25,7 @@
 	height:120px;
 }
 .googleImg:hover{
-	border:#FF0000;
+	border:solid 2px #FF0000;
 }
 .googleImgDispImg{
 	height:200px;

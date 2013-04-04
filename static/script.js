@@ -14,6 +14,9 @@ $(function(){$("#bookTitle").blur(
 		}
 	}
 )});
+//manual toggle contact form
+$(function(){$(".manualExpandCollapse").click(function(){$(".contactForm").slideToggle();});});
+
 
 //addbook form toggler
 $(function(){$(".addBookClickable").click(function(){$(".addBookForm").slideToggle();})});

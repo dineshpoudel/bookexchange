@@ -1,8 +1,8 @@
 {% extends "template.html" %}
 {% block addBook %}
 <br>
-<span class="addBookClickable" > Click here to enter your book details here</span>
-<hr>
+<span class="addBookClickable" > <u>Click here to enter your book details</u></span>
+
 <div class="addBookForm">
 <form method="post" id="addBook" action="/">
 	
@@ -12,13 +12,14 @@
 <tr><td>Asking Price(*):</td><td><input type="text" name="price"  value="{{ newBook.price }}"> {{ priceError }}	</td></tr>
 
 <tr><td colspan=2>
+<span id="smallCaption" class="manualExpandCollapse">---------------- expand / collapse ></span>
 	<div class="contactForm">
 	<table class="table_contact_form">
-	<tr><td colspan=2><i>Please provide at least one way to contact you</i></td></tr>
+	<tr><td id="smallCaption" colspan=2>Please provide at least one way to contact you</td></tr>
 	<tr><td>Phone Number:</td><td><input type="text" name="phoneNumber" value="{{ newBook.phoneNumber }}"></td></tr>
 	<tr><td>Email address:</td><td><input type="text" name="email" value="{{ newBook.email }}"></td></tr>
 	<tr><td>Facebook link:</td><td><input type="text" name="facebook" value="{{ newBook.facebook }}">{{ contactError }}</td></tr>
-	<tr><td colspan=2><span class="moreDetailsClickable"><i>----------Enter more details ---------------</i> </span></td></tr>
+	<tr><td colspan=2><span id="smallCaption" class="moreDetailsClickable">---------------Enter more details> </span></td></tr>
 
 <tr><td colspan=2>
 	<div class="moreDetailsForm">

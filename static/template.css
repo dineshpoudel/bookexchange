@@ -1,5 +1,6 @@
 body{
 	background-color:#FFFFFF;
+	font-family: 'Gabriela', Monospace;
 }
 
 .heading{
@@ -19,7 +20,7 @@ a{
 
 .bookSearch{
 	background-color:#FF0533;
-	padding:0px 0px 0px 20px;
+	padding:0px 0px 0px 10px;
 }
 
 #message{
@@ -35,5 +36,11 @@ a{
 	opacity:0.6;
 	filter:alpha(opacity=60);
 	
+}
+
+#smallCaption{
+	font-size:10px;
+	text-decoration:italic;
+	text-align:right;
 }
 
