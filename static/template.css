@@ -39,8 +39,9 @@ a{
 }
 
 #smallCaption{
+	cursor:pointer;
 	font-size:10px;
 	text-decoration:italic;
-	text-align:right;
+	text-align:left;
 }
 

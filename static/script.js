@@ -1,29 +1,38 @@
-//hide addbook more details form initially
-$(function(){$(".moreDetailsForm").hide();});
-$(function(){$(".contactForm").hide();});
+//validation
+$(function(){$("[name='price']").blur(function(){
+	if(isNaN($("[name='price']").val())){		
+		document.getElementById('priceError').innerHTML = "Enter the valid price.";		
+	}else{
+		document.getElementById('priceError').innerHTML = ":)";
+	}
+;});});
 
-//auto toggle contact form
+
+
+//hide addbook requireddetails form initially
+$(function(){$(".moreDetails").hide();});
+
+//auto toggle requiredDetails form
 $(function(){$("#bookTitle").blur(
 	function(){
-		if($('#bookTitle').val() == ''){
-			$(".contactForm").slideUp();
-			$(".moreDetailsForm").slideUp();
+		if($("[name='bookTitle']").val().length <3){
+			document.getElementById('bookTitleError').innerHTML = ":(";
+			$(".moreDetails").slideUp();
 		}else{
-			$(".contactForm").slideDown();
-			$(".moreDetailsForm").slideDown();
+			$(".moreDetails").slideDown();
+			document.getElementById('bookTitleError').innerHTML = ":)";
 		}
 	}
 )});
-//manual toggle contact form
-$(function(){$(".manualExpandCollapse").click(function(){$(".contactForm").slideToggle();});});
+//manual toggle requiredDetails form
+$(function(){$(".manualExpandCollapse").click(function(){$(".moreDetails").slideToggle();});});
 
 
 //addbook form toggler
 $(function(){$(".addBookClickable").click(function(){$(".addBookForm").slideToggle();})});
 
-//addbook more details toggler
-$(function(){$(".moreDetailsClickable").click(function(){$(".moreDetailsForm").slideToggle();});});
 
+//functions
 function imageSelected(link){
 	document.getElementById('googleImage').value = link;
 	document.getElementById('googleImgDisp').innerHTML = "<img class='googleImgDispImg' src=" + link + "></img>";

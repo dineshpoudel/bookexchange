@@ -8,6 +8,9 @@ import urllib
 from google.appengine.api import memcache
 from google.appengine.ext import db
 
+def getOneBook(id):
+	book = Book.get(db.Key.from_path('Book', int(id)))
+	return book
 
 def findBook(q):
 	books = db.GqlQuery('SELECT * FROM Book')
@@ -22,7 +25,7 @@ def findBook(q):
 def google(q):
 	links = memcache.get('google_%s'%q)
 	if links is None:
-		url = ("https://www.googleapis.com/customsearch/v1?key=KEY&cx=011616688212487868943:hmezcysooqg&q=%s&alt=json&safe=high&searchType=image&num=10"%q)
+		url = ("https://www.googleapis.com/customsearch/v1?key=XXX&cx=011616688212487868943:hmezcysooqg&q=%s&alt=json&safe=high&searchType=image&num=10"%q)
 		p = urllib.urlopen(url)
 		response = json.loads(p.read())
 		data = response['items']
@@ -56,11 +59,8 @@ class Book(db.Model):
 	courseID = db.StringProperty()
 	ISBN = db.IntegerProperty()
 	edition = db.StringProperty()
-	bookCondition = db.TextProperty()
 	price = db.FloatProperty()
-	phoneNumber = db.StringProperty() #do not use phone property
-	email = db.StringProperty() #do not use email property
-	facebook = db.StringProperty() #do not use linkProperty because linkProperty cannot be null
+	contact = db.StringProperty() #phone or email or facebook
 	remark = db.TextProperty()
 	
 	googleImage = db.StringProperty() #do not use linkProperty
@@ -74,11 +74,8 @@ def getBook(self):
 	book.courseID = self.request.get('courseID')
 	book.ISBN = int(self.request.get('ISBN') or 0)
 	book.edition = self.request.get('edition')
-	book.bookCondition = self.request.get('bookCondition')
 	book.price = float(self.request.get('price') or 0) 
-	book.phoneNumber = self.request.get('phoneNumber')
-	book.email = self.request.get('email')
-	book.facebook = self.request.get('facebook')
+	book.contact = self.request.get('contact')
 	book.remark = self.request.get('remark')
 
 	book.googleImage = self.request.get('googleImage')

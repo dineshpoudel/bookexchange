@@ -7,10 +7,10 @@ $(function(){$(".addBookForm").hide();});
 Search Result for {{ bookRequested }} : <hr>
 	<table padding=2px>
 	{% for book in books %}
-		<tr><td>{% if book.googleImage %}<img class="googleImg" src="{{ book.googleImage }}"></img>{% else %}NO IMAGE{% endif %}</td>
+		<tr><td><a href="/book/{{ book.key().id() }}">{% if book.googleImage %}<img class="googleImg" src="{{ book.googleImage }}"></img>{% else %}NO IMAGE{% endif %}</a></td>
 		<td>Name: {{ book.bookTitle }}<br>
-		Condition: {{ book.bookCondition }}<br>
-		Price: {{ book.price }}<br></td></tr>
+		Price: {{ book.price }}<br>
+		Remark: {{ book.remark }}</td></tr>
 	{% endfor %}
 	</table>
 

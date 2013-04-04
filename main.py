@@ -1,5 +1,10 @@
 from render import *
 
+class ShowBook(webapp2.RequestHandler):
+	def get(self,id):
+		out = {'newBook':getOneBook(id)}
+		render(self,'showBook.html',out)
+
 class FindBook(webapp2.RequestHandler):
 	def post(self):
 		out = {'newBook':''}
@@ -21,13 +26,10 @@ class MainPage(webapp2.RequestHandler):
 		if not newBook.bookTitle:
 			out['bookTitleError'] = 'Book Title cant be empty.'
 			error = True
-		elif not newBook.bookCondition:
-			out['bookConditionError'] = 'Please give a brief description of the condtion of the book.'
-			error = True
 		elif not newBook.price:
 			out['priceError'] = 'Please input the price you expect. Enter 0 if you want to donate.'
 			error = True
-		elif not ( newBook.phoneNumber or newBook.email or newBook.facebook):
+		elif not ( newBook.contact):
 			out['contactError'] = 'Please input at least one method of contacting you.'
 			error = True
 	
@@ -51,4 +53,4 @@ class Verify(webapp2.RequestHandler):
 
 
 		
-app = webapp2.WSGIApplication([('/',MainPage),('/verify',Verify),('/findBook',FindBook)],debug=True)
+app = webapp2.WSGIApplication([('/',MainPage),('/verify',Verify),('/findBook',FindBook),('/book/([0-9]+)',ShowBook)],debug=True)

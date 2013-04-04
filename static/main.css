@@ -5,14 +5,11 @@
 }
 #addBook{
 }
-.form_table{
-}
-.moreDetailsClickable{
-	cursor:pointer;
+.table_form{
 }
 .moreDetailsForm{
 }
-.table_moreDetails_form{
+.table_moreDetails{
 }
 #googleImages{
 }
@@ -20,6 +17,7 @@
 }
 
 .googleImg{
+	cursor:pointer;
 	padding:2px;
 	border:solid 2px #555555;
 	height:120px;

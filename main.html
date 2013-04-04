@@ -1,36 +1,29 @@
 {% extends "template.html" %}
 {% block addBook %}
 <br>
-<span class="addBookClickable" > <u>Click here to enter your book details</u></span>
+<div class="addBookClickable" > <u>Click here to enter your book details</u></div>
 
 <div class="addBookForm">
 <form method="post" id="addBook" action="/">
 	
 <table class="table_form">
-<tr><td>Book Title(*):</td><td><input type="text" id="bookTitle" name="bookTitle" value="{{ newBook.bookTitle }}" required> {{ bookTitleError }}</td></tr>
-<tr><td>Book condition(*):</td><td><textarea name="bookCondition" required>{{ newBook.bookCondition }}</textarea>{{ bookConditionError }}</td></tr>
-<tr><td>Asking Price(*):</td><td><input type="text" name="price"  value="{{ newBook.price }}"> {{ priceError }}	</td></tr>
+<tr><td>Book Title(*):</td><td><input type="text" id="bookTitle" name="bookTitle" placeholder="Complete title please" value="{{ newBook.bookTitle }}" required> <span id="bookTitleError">{{ bookTitleError }}</span></td></tr>
+<tr><td>Asking Price(*):</td><td><input type="text" name="price" placeholder="Price, 0 to donate"  value="{{ newBook.price }}"> <span id="priceError">{{ priceError }}</span></td></tr>
 
+<tr><td id="smallCaption" class="manualExpandCollapse" colspan=2>----------collapse/expand></td></tr>
 <tr><td colspan=2>
-<span id="smallCaption" class="manualExpandCollapse">---------------- expand / collapse ></span>
-	<div class="contactForm">
-	<table class="table_contact_form">
-	<tr><td id="smallCaption" colspan=2>Please provide at least one way to contact you</td></tr>
-	<tr><td>Phone Number:</td><td><input type="text" name="phoneNumber" value="{{ newBook.phoneNumber }}"></td></tr>
-	<tr><td>Email address:</td><td><input type="text" name="email" value="{{ newBook.email }}"></td></tr>
-	<tr><td>Facebook link:</td><td><input type="text" name="facebook" value="{{ newBook.facebook }}">{{ contactError }}</td></tr>
-	<tr><td colspan=2><span id="smallCaption" class="moreDetailsClickable">---------------Enter more details> </span></td></tr>
 
-<tr><td colspan=2>
-	<div class="moreDetailsForm">
-	<table class="table_moreDetails_form">
-	<tr><td>Course:</td><td><input type="text" name="courseID" value="{{ newBook.courseID }}"></td></tr>
-	<tr><td>ISBN:</td><td><input type"text" name="ISBN" value="{{ newBook.ISBN }}"></td></tr>
-	<tr><td>Edition:</td><td><input type="text" name="edition" value="{{ newBook.edition }}"></td></tr>
-	<tr><td>Any Remarks:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><textarea name="remark">{{ newBook.remark }} </textarea></td></tr>
-	</table>
-	</div>
-</td></tr>
+<div class="moreDetails">
+<table class="table_moreDetails">
+
+<tr><td id="smallCaption" style="text-align:right" colspan=2>Phone number or Email or Facebook link or prefered contact method<br>
+<input type="text" name="contact" placeholder="Contact Address" value="{{ newBook.contact }}"> <br><input type="text" name="verifyContact" placeholder="Re-enter contact address" value="">{{ contactError }}</td></tr>
+
+<tr><td>Course:</td><td><input type="text" name="courseID" value="{{ newBook.courseID }}"></td></tr>
+<tr><td>ISBN:</td><td><input type"text" name="ISBN" value="{{ newBook.ISBN }}"></td></tr>
+<tr><td>Edition:</td><td><input type="text" name="edition" value="{{ newBook.edition }}"></td></tr>
+<tr><td>Any Remarks:</td><td><textarea name="remark">{{ newBook.remark }} </textarea></td></tr>
+
 
 <tr><td><input type="reset" value="Re-enter Details"></td>
 <td><input type="submit" name="submit" value="Add Book"></td></tr>
@@ -51,7 +44,8 @@
 <b>Featured Books</b><hr> 
 	<table>
 	{% for book in featuredBooks %}	
-		<tr><td>{% if book.googleImage %}<img class="googleImg" src="{{ book.googleImage }}"></img>{% else %}<img class="googleImg" src="/static/noBookImage.gif"></img>{% endif %}</td>
+		<tr>
+		<td><a href="/book/{{ book.key().id() }}">{% if book.googleImage %}<img class="googleImg" src="{{ book.googleImage }}"></img>{% else %}<img class="googleImg" src="/static/noBookImage.gif"></img>{% endif %}</a></td>
 		<td>Name: {{ book.bookTitle }}<br>
 		Condition: {{ book.bookCondition }}<br>
 		Price: {{ book.price }}<br></td></tr>
