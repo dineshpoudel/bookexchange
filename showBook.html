@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title> Book Exchange </title>
+	<meta charset="UTF-8">
+
+	<link rel="stylesheet" href="../static/template.css">
+	<link rel="stylesheet" href="../static/main.css">
+
+	<link href='http://fonts.googleapis.com/css?family=Gabriela' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="../static/script.js"></script>
+</head>
+<body>
+<!--heading -->
+<div class="heading"><a href="/"><span class="title">Book Exchange</span> at Clark</a>
+	<!--book search -->
+	<div class="bookSearch" > 
+		<form method="post" action="/findBook">
+		<label name="findBook">Search Book &nbsp;<input type="search" name="findBook" placeholder="Search Book"></label>
+		</form>
+	</div>
+</div>
+<div id="message">{{ message }}</div>	
+
+<br><span id="pageHeading">Verify the details you just entered.</span>
+<hr>
+<div class="addBookForm">
+<form method="post" id="addBook" action="/verify" onsubmit="return validate2();">
+	
+<table class="table_form">
+<tr><td>Book Title(*):</td><td><input type="hidden" name="bookTitle" value="{{ newBook.bookTitle }}" readonly>{{ newBook.bookTitle }}</td>
+<td rowspan=11 id='googleImgDisp'><img class="googleImg" src="{{ newBook.googleImage }}"></img></td></tr>
+<tr><td>Asking Price(*):</td><td><input type="hidden" name="price"  value="{{ newBook.price }}" readonly>$ {{ newBook.price }}</td></tr>
+<tr><td>Contact via:</td><td><input type="hidden" name="contact" value="{{ newBook.contact }}" readonly><u>{{ newBook.contact }}</u></td></tr>
+<tr><td>Course:</td><td><input type="hidden" name="courseID" value="{{ newBook.courseID }}" readonly>{{ newBook.courseID }}</td></tr>
+<tr><td>ISBN:</td><td><input type="hidden" name="ISBN" value="{{ newBook.ISBN }}" readonly>{{ newBook.ISBN }}</td></tr>
+<tr><td>Edition:</td><td><input type="hidden" name="edition" value="{{ newBook.edition }}" readonly>{{ newBook.edition }}</td></tr>
+<tr><td>Any Remarks:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input type="hidden" name="remark" readonly value="{{ newBook.remark }}">{{ newBook.remark }}</td></tr>
+<tr> <td colspan=2><input type="hidden" id="googleImage" name="googleImage">
+<span id="errorMsg" class="error"></span>
+</td>
+<script language='javascript'>
+	document.getElementById('pageHeading').innerHTML = "Is this the book you want?";
+</script>
+
+<tr><td colspan=2> <i><u>Contact the seller using the contact address above</u></i> </td></tr>
+
+</table>
+<hr>
+</form></div>
+
+<hr>
+<a href="/"> Go Back </a>
+
+<hr>
+<footer id="smallCaption"><a href="mailto:shrestha.sarjan@gmail.com">Feedback</a> | Beta Version, 2013 </footer>
+</body>
+</html>
+
+
+

@@ -1,0 +1,50 @@
+body{
+	background-color:#FFFFFF;
+	font-family: 'Gabriela', Monospace;
+}
+
+.heading{
+	position:relative;
+	background-color:#FF0533;
+	padding:5px;
+	width:auto;
+	font-family: 'Gabriela', Monospace;
+	text-decoration:none;
+}
+a{
+	text-decoration:none;
+}
+.title{
+	font-size:30px;
+}
+
+.bookSearch{
+	background-color:#FF0533;
+	padding:0px 0px 0px 10px;
+}
+
+#message{
+	position:absolute;
+	top:0px;
+	margin: 0 auto;
+	width:auto;
+	background-color:#FF9999;
+	border:1px solid #777777;
+	border-bottom-left-radius:25%;
+	border-bottom-right-radius:25%;
+	padding:3px 7px;
+	opacity:0.6;
+	filter:alpha(opacity=60);
+	
+}
+
+#smallCaption{
+	cursor:pointer;
+	font-size:10px;
+	text-decoration:italic;
+	text-align:left;
+}
+
+.error{
+	color:red;
+}

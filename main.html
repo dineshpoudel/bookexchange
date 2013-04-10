@@ -1,0 +1,56 @@
+{% extends "template.html" %}
+{% block addBook %}
+<br>
+<div class="addBookClickable" > <u>Enter your book details</u></div>
+
+<div class="addBookForm">
+<form method="post" id="addBook" action="/" onsubmit="return validate();">
+	
+<table class="table_form">
+<tr><td>Book Title(*):</td><td><input type="text" id="bookTitle" name="bookTitle" placeholder="Complete title please" value="{{ newBook.bookTitle }}" required> <span id="bookTitleError" class="error">{{ bookTitleError }}</span></td></tr>
+<tr><td>Asking Price(*):&nbsp;&nbsp;</td><td><input type="text" name="price" placeholder="Price in USD($), 0 to donate"  value="{{ newBook.price }}"> <span id="priceError" class="error">{{ priceError }}</span></td></tr>
+
+<tr><td id="smallCaption" class="manualExpandCollapse" colspan=2 >----------collapse/expand--</td></tr>
+<tr><td colspan=2>
+
+<div class="moreDetails">
+<table class="table_moreDetails">
+
+<tr><td id="smallCaption" style="text-align:right" ><b>Phone number</b> or <b>Email</b>or<br><b>Facebook</b> link or<br>any prefered contact method<br></td><td>
+<input type="text" name="contact" placeholder="Contact Address" value="{{ newBook.contact }}"> <br><input type="text" name="verifyContact" placeholder="Re-enter contact address" value=""><br><span id="contactError" class="error">{{ contactError }}</span></td></tr>
+
+<tr><td>Course:</td><td><input type="text" name="courseID" value="{{ newBook.courseID }}" placeholder="e.g.CSCI 110"></td></tr>
+<tr><td>ISBN:</td><td><input type"text" name="ISBN" value="{{ newBook.ISBN }}" ></td></tr>
+<tr><td>Edition:</td><td><input type="text" name="edition" value="{{ newBook.edition }}"></td></tr>
+<tr><td>Any Remarks:</td><td><textarea placeholder="Briefly, explain condition of book" name="remark" >{{ newBook.remark }}</textarea></td></tr>
+
+
+<tr><td><input type="reset" value="Re-enter Details"></td>
+<td><input type="submit" name="submit"  value="Add Book"></td></tr>
+</table>
+</div>
+</tr></td>
+</table>
+<hr>
+</form></div>
+{% endblock %}
+
+
+
+{% block dispBook %}
+<!--featured books -->
+
+<div id="featuredBooks" >
+<b>Recent Books</b><hr> 
+	<table>
+	{% for book in featuredBooks %}	
+		<tr>
+		<td><a href="/book/{{ book.key().id() }}">{% if book.googleImage %}<img class="googleImg" src="{{ book.googleImage }}"></img>{% else %}<img class="googleImg" src="/static/noBookImage.gif"></img>{% endif %}</a></td>
+		<td><b>Name:</b><i> {{ book.bookTitle }}</i><br>
+		<b>Condition: </b><i>{{ book.remark }}</i><br>
+		<b>Price: </b><i>{{ book.price }}</i><br></td></tr>
+	{% endfor %}
+	</table>
+
+{% endblock %}
+

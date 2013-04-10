@@ -1,0 +1,24 @@
+{% extends "main.html" %}
+
+{% block dispBook %}
+<script language="javascript">
+$(function(){$(".addBookForm").hide();});
+</script>
+Search Result for {{ bookRequested }} : <hr>
+	{% if books == [] %}
+		No result found. Please check if the spellings are correct. :(
+	{% else %}
+	<table padding=2px>
+	{% for book in books %}
+		<tr><td><a href="/book/{{ book.key().id() }}">{% if book.googleImage %}<img class="googleImg" src="{{ book.googleImage }}"></img>{% else %}NO IMAGE{% endif %}</a></td>
+		<td>Name: <i>{{ book.bookTitle }}</i><br>
+		Price:<i> {{ book.price }}</i><br>
+		Remark:<i> {{ book.remark }}</i></td></tr>
+	{% endfor %}
+	</table>
+	{% endif %}
+
+{% endblock %}
+
+
+

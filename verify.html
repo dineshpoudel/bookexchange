@@ -1,0 +1,49 @@
+{% extends "template.html" %}
+
+{% block addBook %}
+<br><span id="pageHeading">Verify the details you just entered.</span>
+<hr>
+<div class="addBookForm">
+<form method="post" id="addBook" action="/verify" onsubmit="return validate2();">
+	
+<table class="table_form">
+<tr><td>Book Title(*):</td><td><input type="hidden" name="bookTitle" value="{{ newBook.bookTitle }}" readonly>{{ newBook.bookTitle }}</td>
+<td rowspan=11 id='googleImgDisp'><img class="googleImg" src="{{ newBook.googleImage }}">Select book image from below</img></td></tr>
+<tr><td>Asking Price(*):</td><td><input type="hidden" name="price"  value="{{ newBook.price }}" readonly>$ {{ newBook.price }}</td></tr>
+<tr><td>Contact via:</td><td><input type="hidden" name="contact" value="{{ newBook.contact }}" readonly><u>{{ newBook.contact }}</u></td></tr>
+<tr><td>Course:</td><td><input type="hidden" name="courseID" value="{{ newBook.courseID }}" readonly>{{ newBook.courseID }}</td></tr>
+<tr><td>ISBN:</td><td><input type="hidden" name="ISBN" value="{{ newBook.ISBN }}" readonly>{{ newBook.ISBN }}</td></tr>
+<tr><td>Edition:</td><td><input type="hidden" name="edition" value="{{ newBook.edition }}" readonly>{{ newBook.edition }}</td></tr>
+<tr><td>Any Remarks:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input type="hidden" name="remark" readonly value="{{ newBook.remark }}">{{ newBook.remark }}</td></tr>
+<tr> <td colspan=2><input type="hidden" id="googleImage" name="googleImage">
+<span id="errorMsg" class="error"></span>
+</td>
+{% block buttons %} 
+<tr><td><input type="button" value="Edit Again" onclick="history.back();"></td>
+<td><input type="submit" name="submit" value="Verify"></td></tr>
+{% endblock %}
+</table>
+<hr>
+</form></div>
+
+
+<!--google image for adding books-->
+{% endblock %}
+
+{% block dispBook %}
+{% if googleImages %}
+<div id="googleImgaes"> Select one of the following images <hr> 
+<img class="googleImg" src="/static/noBookImage.gif" onclick="imageSelected('None')" height=120px ></img>
+{% for image in googleImages %}<img class="googleImg" src="{{ image }}" onclick="imageSelected('{{image}}')" height=120px clicked=0></img>
+{% endfor %}
+<hr></div>
+{% endif %}
+
+
+
+
+
+{% endblock %}
+
+
+
